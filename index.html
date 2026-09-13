@@ -1,952 +1,1846 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anagha Sonde — Technology. Healing. Creativity. Stories.</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#211D1A;
-    --ink-soft:#3A342E;
-    --parchment:#F3ECDE;
-    --parchment-deep:#EAE1CD;
-    --paper:#FBF8F2;
-    --rust:#B75B34;
-    --rust-deep:#9C4A29;
-    --sage:#69745A;
-    --gold-line: rgba(169,138,78,0.4);
-    --hair: rgba(33,29,26,0.14);
-    --hair-soft: rgba(33,29,26,0.08);
-    --max: 1160px;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--parchment);
-    color:var(--ink);
-    font-family:'Work Sans', sans-serif;
-    font-weight:400;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3,h4{
-    font-family:'Fraunces', serif;
-    font-weight:500;
-    margin:0;
-    line-height:1.08;
-    letter-spacing:-0.01em;
-    color:var(--ink);
-  }
-  p{margin:0;}
-  a{color:inherit; text-decoration:none;}
-  img{max-width:100%; display:block;}
-  ::selection{background:var(--rust); color:var(--paper);}
-  :focus-visible{outline:2px solid var(--rust); outline-offset:3px;}
-
-  .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
-  @media(max-width:640px){.wrap{padding:0 20px;}}
-
-  /* ---------- NAV ---------- */
-  header.site-nav{
-    position:fixed; top:0; left:0; right:0; z-index:100;
-    background:rgba(243,236,222,0.92);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--hair);
-  }
-  .nav-inner{
-    max-width:var(--max); margin:0 auto; padding:20px 32px;
-    display:flex; align-items:center; justify-content:space-between;
-  }
-  .wordmark{
-    font-family:'Fraunces', serif; font-style:italic; font-weight:500;
-    font-size:1.28rem; letter-spacing:0.01em;
-  }
-  nav.primary{display:flex; gap:34px;}
-  nav.primary a{
-    font-size:0.92rem; color:var(--ink-soft); position:relative; padding:4px 0;
-    transition:color .2s ease;
-  }
-  nav.primary a::after{
-    content:''; position:absolute; left:0; right:0; bottom:-2px; height:1px;
-    background:var(--rust); transform:scaleX(0); transform-origin:left;
-    transition:transform .25s ease;
-  }
-  nav.primary a.active, nav.primary a:hover{color:var(--ink);}
-  nav.primary a.active::after, nav.primary a:hover::after{transform:scaleX(1);}
-  .menu-btn{
-    display:none; background:none; border:none; cursor:pointer; padding:6px;
-  }
-  .menu-btn span{display:block; width:24px; height:1.5px; background:var(--ink); margin:5px 0; transition:.25s;}
-  @media(max-width:900px){
-    nav.primary{
-      position:fixed; top:64px; left:0; right:0; bottom:0;
-      background:var(--parchment); flex-direction:column; gap:0;
-      padding:10px 32px 40px; transform:translateX(100%);
-      transition:transform .3s ease; overflow-y:auto;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anagha Sonde — Technology. Healing. Creativity. Stories.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --ink: #211D1A;
+      --ink-soft: #3A342E;
+      --parchment: #F3ECDE;
+      --parchment-deep: #EAE1CD;
+      --paper: #FBF8F2;
+      --rust: #B75B34;
+      --rust-deep: #9C4A29;
+      --sage: #69745A;
+      --gold-line: rgba(169, 138, 78, 0.4);
+      --hair: rgba(33, 29, 26, 0.14);
+      --hair-soft: rgba(33, 29, 26, 0.08);
+      --max: 1160px;
     }
-    nav.primary.open{transform:translateX(0);}
-    nav.primary a{padding:16px 0; border-bottom:1px solid var(--hair-soft); font-size:1.05rem;}
-    .menu-btn{display:block;}
-  }
 
-  main{padding-top:76px;}
-  section{display:none;}
-  section.active{display:block;}
-  .page-enter{animation:fadeUp .5s ease both;}
-  @keyframes fadeUp{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);}}
+    * {
+      box-sizing: border-box;
+    }
 
-  .eyebrow{font-size:0.82rem; color:var(--sage); font-style:italic; font-family:'Fraunces', serif;}
-  .rule{height:1px; background:var(--hair); border:none; margin:0;}
+    html {
+      scroll-behavior: smooth;
+    }
 
-  /* ---------- BUTTONS ---------- */
-  .btn{
-    display:inline-block; padding:14px 30px; border:1px solid var(--ink);
-    font-size:0.92rem; letter-spacing:0.01em; border-radius:2px;
-    transition:background .2s ease, color .2s ease, border-color .2s ease;
-  }
-  .btn:hover{background:var(--ink); color:var(--paper);}
-  .btn.solid{background:var(--rust); border-color:var(--rust); color:var(--paper);}
-  .btn.solid:hover{background:var(--rust-deep); border-color:var(--rust-deep);}
+    body {
+      margin: 0;
+      background: var(--parchment);
+      color: var(--ink);
+      font-family: 'Work Sans', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  /* ============ HOME ============ */
-  .hero {
-    padding: 60px 0 60px;
-  }
-  .hero-banner {
-    position: relative;
-    border-radius: 4px;
-    overflow: hidden;
-    /* Set a nice min-height for the banner */
-    min-height: 600px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
-  .hero-grid {
-    display: grid; grid-template-columns: 1.4fr 1fr; gap: 50px; align-items: end;
-    padding: 96px 40px 140px; /* Increased bottom padding to accommodate downward shift */
-    position: relative;
-    z-index: 2;
-  }
-  .hero-image-wrapper {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 1;
-  }
-  .hero-image {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center 30%;
-    opacity: 0;
-    filter: brightness(1.08) contrast(1.02); /* Brightens the picture */
-    animation: heroImageAnim 3.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  }
-  @keyframes heroImageAnim {
-    from { opacity: 0; transform: scale(1.03); }
-    to { opacity: 1; transform: scale(1); }
-  }
-  .hero-overlay {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    /* Very subtle bright gradient to help text stand out without dulling the image */
-    background: linear-gradient(to right, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 30%, rgba(255,255,255,0) 70%, rgba(255,255,255,0.5) 100%);
-    pointer-events: none;
-  }
-  .hero h1 {
-    font-size: clamp(3.2rem, 8vw, 6.4rem);
-    line-height: 0.96;
-    color: var(--ink);
-    opacity: 0;
-    text-shadow: 0 4px 15px rgba(255,255,255,0.7);
-    animation: heroTextAnim 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
-  }
-  .hero .tagline {
-    font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(1.2rem, 2vw, 1.5rem);
-    color: var(--rust-deep); margin-top: 18px;
-    opacity: 0;
-    text-shadow: 0 2px 10px rgba(255,255,255,0.7);
-    animation: heroTextAnim 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
-  }
-  @keyframes heroTextAnim {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .hero-side {
-    border-left: 1px solid rgba(33,29,26,0.3); /* slightly stronger border for image background */
-    padding-left: 32px;
-    margin-left: 96px; /* Push right by 1 inch */
-    margin-bottom: -96px; /* Push downward by 1 inch */
-  }
-  .hero-side p {
-    font-size: 1.05rem; 
-    color: var(--ink); 
-    max-width: 34ch;
-    font-weight: 500; /* Bolder for legibility */
-    text-shadow: 0 2px 10px rgba(255,255,255,0.7);
-  }
-  @media(max-width: 800px) {
-    .hero-grid { grid-template-columns: 1fr; gap: 30px; padding: 60px 20px 50px; }
-    .hero-side { border-left: none; border-top: 1px solid rgba(33,29,26,0.3); padding-left: 0; padding-top: 24px; margin-left: 0; margin-bottom: 0; }
-    .hero-image { object-position: center 25%; }
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      margin: 0;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    p {
+      margin: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    ::selection {
+      background: var(--rust);
+      color: var(--paper);
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--rust);
+      outline-offset: 3px;
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    @media(max-width:640px) {
+      .wrap {
+        padding: 0 20px;
+      }
+    }
+
+    /* ---------- NAV ---------- */
+    header.site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(243, 236, 222, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--hair);
+    }
+
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .wordmark {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 1.28rem;
+      letter-spacing: 0.01em;
+    }
+
+    nav.primary {
+      display: flex;
+      gap: 34px;
+    }
+
+    nav.primary a {
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+      position: relative;
+      padding: 4px 0;
+      transition: color .2s ease;
+    }
+
+    nav.primary a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -2px;
+      height: 1px;
+      background: var(--rust);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .25s ease;
+    }
+
+    nav.primary a.active,
+    nav.primary a:hover {
+      color: var(--ink);
+    }
+
+    nav.primary a.active::after,
+    nav.primary a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+    }
+
+    .menu-btn span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--ink);
+      margin: 5px 0;
+      transition: .25s;
+    }
+
+    @media(max-width:900px) {
+      nav.primary {
+        position: fixed;
+        top: 64px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--parchment);
+        flex-direction: column;
+        gap: 0;
+        padding: 10px 32px 40px;
+        transform: translateX(100%);
+        transition: transform .3s ease;
+        overflow-y: auto;
+      }
+
+      nav.primary.open {
+        transform: translateX(0);
+      }
+
+      nav.primary a {
+        padding: 16px 0;
+        border-bottom: 1px solid var(--hair-soft);
+        font-size: 1.05rem;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+    }
+
+    main {
+      padding-top: 76px;
+    }
+
+    section {
+      display: none;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    .page-enter {
+      animation: fadeUp .5s ease both;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .eyebrow {
+      font-size: 0.82rem;
+      color: var(--sage);
+      font-style: italic;
+      font-family: 'Fraunces', serif;
+    }
+
+    .rule {
+      height: 1px;
+      background: var(--hair);
+      border: none;
+      margin: 0;
+    }
+
+    /* ---------- BUTTONS ---------- */
+    .btn {
+      display: inline-block;
+      padding: 14px 30px;
+      border: 1px solid var(--ink);
+      font-size: 0.92rem;
+      letter-spacing: 0.01em;
+      border-radius: 2px;
+      transition: background .2s ease, color .2s ease, border-color .2s ease;
+    }
+
+    .btn:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .btn.solid {
+      background: var(--rust);
+      border-color: var(--rust);
+      color: var(--paper);
+    }
+
+    .btn.solid:hover {
+      background: var(--rust-deep);
+      border-color: var(--rust-deep);
+    }
+
+    /* ============ HOME ============ */
+    .hero {
+      padding: 60px 0 60px;
+    }
+
+    .hero-banner {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      /* Set a nice min-height for the banner */
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 50px;
+      align-items: end;
+      padding: 96px 40px 140px;
+      /* Increased bottom padding to accommodate downward shift */
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-image-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      opacity: 0;
+      filter: brightness(1.08) contrast(1.02);
+      /* Brightens the picture */
+      animation: heroImageAnim 3.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+
+    @keyframes heroImageAnim {
+      from {
+        opacity: 0;
+        transform: scale(1.03);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
     .hero-overlay {
-      background: linear-gradient(to top, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 100%);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      /* Very subtle bright gradient to help text stand out without dulling the image */
+      background: linear-gradient(to right, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 0.5) 100%);
+      pointer-events: none;
     }
-  }
 
-  .pathways{
-    border-top:1px solid var(--hair);
-  }
-  .pathway-row{
-    display:grid; grid-template-columns:repeat(4,1fr);
-  }
-  .pathway{
-    border-right:1px solid var(--hair); border-bottom:1px solid var(--hair);
-    padding:40px 30px 44px; cursor:pointer; transition:background .25s ease;
-    display:flex; flex-direction:column; justify-content:space-between; min-height:280px;
-  }
-  .pathway.reveal-ready {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  .pathway.revealed {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.6s ease, transform 0.6s ease, background 0.25s ease;
-  }
-  .pathway:last-child{border-right:none;}
-  .pathway:hover{background:var(--parchment-deep);}
-  .pathway .num{font-size:0.8rem; color:var(--sage); font-family:'Fraunces',serif; font-style:italic;}
-  .pathway h3{font-size:1.5rem; margin-top:50px;}
-  .pathway .sub{font-size:0.88rem; color:var(--ink-soft); margin-top:10px; line-height:1.55;}
-  .pathway .go{margin-top:20px; font-size:0.85rem; color:var(--rust-deep);}
-  @media(max-width:900px){
-    .pathway-row{grid-template-columns:1fr 1fr;}
-    .pathway:nth-child(2){border-right:none;}
-    .pathway:nth-child(4){border-right:none;}
-  }
-  @media(max-width:560px){
-    .pathway-row{grid-template-columns:1fr;}
-    .pathway{border-right:none !important;}
-  }
+    .hero h1 {
+      font-size: clamp(3.2rem, 8vw, 6.4rem);
+      line-height: 0.96;
+      color: var(--ink);
+      opacity: 0;
+      text-shadow: 0 4px 15px rgba(255, 255, 255, 0.7);
+      animation: heroTextAnim 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+    }
 
-  .home-intro{
-    padding:90px 0; border-top:1px solid var(--hair);
-  }
-  .home-intro .grid2{
-    display:grid; grid-template-columns:0.9fr 1.5fr; gap:60px;
-  }
-  .home-intro h2{font-size:clamp(1.8rem,3vw,2.5rem);}
-  .home-intro .body-col p{font-size:1.08rem; color:var(--ink-soft); max-width:62ch;}
-  .home-intro .body-col p + p{margin-top:18px;}
-  @media(max-width:800px){.home-intro .grid2{grid-template-columns:1fr; gap:24px;}}
+    .hero .tagline {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: clamp(1.2rem, 2vw, 1.5rem);
+      color: var(--rust-deep);
+      margin-top: 18px;
+      opacity: 0;
+      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.7);
+      animation: heroTextAnim 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
+    }
 
-  /* ============ GENERIC PAGE HEADER ============ */
-  .page-head{
-    padding:70px 0 50px; border-bottom:1px solid var(--hair);
-  }
-  .page-head h1{font-size:clamp(2.4rem,5vw,3.6rem);}
-  .page-head .dek{
-    font-family:'Fraunces',serif; font-style:italic; color:var(--rust-deep);
-    font-size:1.15rem; margin-top:14px; max-width:52ch;
-  }
+    @keyframes heroTextAnim {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
 
-  .section-block{padding:64px 0; border-bottom:1px solid var(--hair);}
-  .section-block:last-child{border-bottom:none;}
-  .section-block h2{font-size:clamp(1.6rem,2.6vw,2.1rem); margin-bottom:28px;}
-  .two-col{display:grid; grid-template-columns:0.7fr 1.3fr; gap:56px;}
-  @media(max-width:800px){.two-col{grid-template-columns:1fr; gap:22px;}}
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-  /* ---------- ABOUT ---------- */
-  .about-lede{font-family:'Fraunces',serif; font-size:clamp(1.4rem,2.4vw,1.9rem); font-weight:400; max-width:38ch; color:var(--ink);}
-  .about-body p{font-size:1.05rem; color:var(--ink-soft); max-width:66ch;}
-  .about-body p + p{margin-top:20px;}
-  .pull{
-    font-family:'Fraunces', serif; font-style:italic; font-size:1.5rem;
-    border-left:2px solid var(--rust); padding-left:24px; margin:34px 0;
-    color:var(--ink); max-width:52ch;
-  }
+    .hero-side {
+      border-left: 1px solid rgba(33, 29, 26, 0.3);
+      /* slightly stronger border for image background */
+      padding-left: 32px;
+      margin-left: 96px;
+      /* Push right by 1 inch */
+      margin-bottom: -96px;
+      /* Push downward by 1 inch */
+    }
 
-  /* ---------- SKILLS / TECH ---------- */
-  .skills-list{display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-top:1px solid var(--hair); border-left:1px solid var(--hair);}
-  .skill-cell{
-    border-right:1px solid var(--hair); border-bottom:1px solid var(--hair);
-    padding:22px 22px; font-family:'Fraunces',serif; font-size:1.05rem;
-  }
-  .skill-cell span{display:block; font-family:'Work Sans',sans-serif; font-size:0.8rem; color:var(--sage); margin-top:4px;}
-  @media(max-width:700px){.skills-list{grid-template-columns:repeat(2,1fr);}}
-  @media(max-width:440px){.skills-list{grid-template-columns:1fr;}}
+    .hero-side p {
+      font-size: 1.05rem;
+      color: var(--ink);
+      max-width: 34ch;
+      font-weight: 500;
+      /* Bolder for legibility */
+      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.7);
+    }
 
-  .timeline{border-top:1px solid var(--hair);}
-  .tl-item{display:grid; grid-template-columns:140px 1fr; gap:30px; padding:26px 0; border-bottom:1px solid var(--hair);}
-  .tl-item .yr{font-family:'Fraunces',serif; font-style:italic; color:var(--rust-deep);}
-  .tl-item h4{font-size:1.15rem; margin-bottom:6px;}
-  .tl-item p{color:var(--ink-soft); font-size:0.97rem; max-width:60ch;}
-  @media(max-width:600px){.tl-item{grid-template-columns:1fr; gap:6px;}}
+    @media(max-width: 800px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 60px 20px 50px;
+      }
 
-  .project-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--hair); border:1px solid var(--hair);}
-  .project-card{background:var(--parchment); padding:32px;}
-  .project-card h4{font-size:1.2rem; margin-bottom:10px;}
-  .project-card p{color:var(--ink-soft); font-size:0.95rem;}
-  .project-card .tags{margin-top:14px; font-size:0.8rem; color:var(--sage); font-style:italic; font-family:'Fraunces',serif;}
-  @media(max-width:700px){.project-grid{grid-template-columns:1fr;}}
+      .hero-side {
+        border-left: none;
+        border-top: 1px solid rgba(33, 29, 26, 0.3);
+        padding-left: 0;
+        padding-top: 24px;
+        margin-left: 0;
+        margin-bottom: 0;
+      }
 
-  /* ---------- COACHING ---------- */
-  .help-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:36px 50px;}
-  .help-item h4{font-size:1.15rem; margin-bottom:8px;}
-  .help-item p{color:var(--ink-soft); font-size:0.96rem;}
-  @media(max-width:700px){.help-grid{grid-template-columns:1fr;}}
+      .hero-image {
+        object-position: center 25%;
+      }
 
-  .testimonial{
-    padding:30px 0; border-bottom:1px solid var(--hair);
-  }
-  .testimonial:last-child{border-bottom:none;}
-  .testimonial p.quote{font-family:'Fraunces',serif; font-style:italic; font-size:1.2rem; max-width:60ch;}
-  .testimonial .who{margin-top:12px; font-size:0.85rem; color:var(--sage);}
+      .hero-overlay {
+        background: linear-gradient(to top, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0) 100%);
+      }
+    }
 
-  .cta-band{
-    background:var(--ink); color:var(--paper); padding:64px 0; text-align:left;
-  }
-  .cta-band .wrap{display:flex; justify-content:space-between; align-items:center; gap:30px; flex-wrap:wrap;}
-  .cta-band h2{color:var(--paper); font-size:clamp(1.6rem,3vw,2.2rem); max-width:20ch;}
-  .cta-band .btn{border-color:var(--paper); color:var(--paper);}
-  .cta-band .btn:hover{background:var(--paper); color:var(--ink);}
+    .pathways {
+      border-top: 1px solid var(--hair);
+    }
 
-  /* ---------- BOOK ---------- */
-  .book-hero{display:grid; grid-template-columns:0.8fr 1.2fr; gap:60px; align-items:center; padding:70px 0;}
-  .book-cover{
-    aspect-ratio:2/3; background:linear-gradient(160deg, var(--ink) 0%, #3a2f28 55%, var(--rust-deep) 100%);
-    display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
-    padding:40px; border:1px solid var(--hair);
-  }
-  .book-cover .bk-title{color:var(--paper); font-family:'Fraunces',serif; font-size:1.8rem; line-height:1.15;}
-  .book-cover .bk-sub{color:var(--parchment-deep); font-size:0.85rem; margin-top:18px; letter-spacing:0.04em;}
-  .book-cover .bk-by{color:var(--parchment); font-family:'Fraunces',serif; font-style:italic; margin-top:26px; font-size:0.95rem;}
-  .book-hero h1{font-size:clamp(2.2rem,4vw,3rem);}
-  .book-hero .by{font-family:'Fraunces',serif; font-style:italic; color:var(--rust-deep); margin-top:10px; font-size:1.1rem;}
-  .book-hero .intro{margin-top:24px; font-size:1.08rem; color:var(--ink-soft); max-width:56ch;}
-  @media(max-width:800px){.book-hero{grid-template-columns:1fr; gap:32px;}}
+    .pathway-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
 
-  .theme-list{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--hair); border:1px solid var(--hair);}
-  .theme-card{background:var(--parchment); padding:28px;}
-  .theme-card h4{font-size:1.05rem; margin-bottom:8px;}
-  .theme-card p{font-size:0.9rem; color:var(--ink-soft);}
-  @media(max-width:700px){.theme-list{grid-template-columns:1fr;}}
+    .pathway {
+      border-right: 1px solid var(--hair);
+      border-bottom: 1px solid var(--hair);
+      padding: 40px 30px 44px;
+      cursor: pointer;
+      transition: background .25s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 280px;
+    }
 
-  /* ---------- DANCE ---------- */
-  .dance-hero{padding:70px 0; display:grid; grid-template-columns:1.1fr 0.9fr; gap:50px; align-items:start;}
-  @media(max-width:800px){.dance-hero{grid-template-columns:1fr;}}
-  .gallery-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:6px;}
-  .gallery-grid .g{aspect-ratio:3/4; background:linear-gradient(150deg,var(--parchment-deep),var(--sage) 140%); opacity:0.85;}
-  @media(max-width:700px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}
-  .video-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
-  .video-card{aspect-ratio:16/9; background:var(--ink); color:var(--parchment); display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-style:italic; font-size:0.95rem; text-align:center; padding:20px;}
-  @media(max-width:700px){.video-grid{grid-template-columns:1fr 1fr;}}
-  @media(max-width:480px){.video-grid{grid-template-columns:1fr;}}
+    .pathway.reveal-ready {
+      opacity: 0;
+      transform: translateY(15px);
+    }
 
-  /* ---------- ANATHINKS / BLOG ---------- */
-  .blog-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--hair); border:1px solid var(--hair);}
-  .blog-card{background:var(--parchment); padding:34px; display:flex; flex-direction:column; gap:14px; min-height:220px;}
-  .blog-card .tag{font-size:0.78rem; color:var(--sage); font-family:'Fraunces',serif; font-style:italic;}
-  .blog-card h3{font-size:1.3rem;}
-  .blog-card p{color:var(--ink-soft); font-size:0.94rem;}
-  .blog-card .read{margin-top:auto; font-size:0.85rem; color:var(--rust-deep);}
-  @media(max-width:700px){.blog-grid{grid-template-columns:1fr;}}
+    .pathway.revealed {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.6s ease, transform 0.6s ease, background 0.25s ease;
+    }
 
-  /* ---------- CONTACT ---------- */
-  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px; padding:70px 0;}
-  @media(max-width:800px){.contact-grid{grid-template-columns:1fr; gap:34px;}}
-  .field{margin-bottom:22px;}
-  .field label{display:block; font-size:0.85rem; color:var(--sage); margin-bottom:8px;}
-  .field input, .field textarea, .field select{
-    width:100%; background:transparent; border:none; border-bottom:1px solid var(--hair);
-    padding:10px 0; font-family:'Work Sans',sans-serif; font-size:1rem; color:var(--ink);
-  }
-  .field input:focus, .field textarea:focus, .field select:focus{border-color:var(--rust); outline:none;}
-  .contact-info h3{font-size:1.3rem; margin-bottom:16px;}
-  .contact-info .line{padding:14px 0; border-bottom:1px solid var(--hair-soft); font-size:0.98rem; color:var(--ink-soft);}
-  .contact-info .line b{color:var(--ink); font-weight:500;}
+    .pathway:last-child {
+      border-right: none;
+    }
 
-  footer{border-top:1px solid var(--hair); padding:36px 0; margin-top:0;}
-  footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;}
-  footer p{font-size:0.85rem; color:var(--sage);}
-  footer .fnav{display:flex; gap:22px; font-size:0.85rem;}
+    .pathway:hover {
+      background: var(--parchment-deep);
+    }
 
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    .page-enter{animation:none;}
-    .hero-image, .hero h1, .hero .tagline { animation: none !important; opacity: 1 !important; transform: none !important; }
-    .pathway.reveal-ready { opacity: 1 !important; transform: none !important; transition: none !important; }
-  }
-</style>
+    .pathway .num {
+      font-size: 0.8rem;
+      color: var(--sage);
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+    }
+
+    .pathway h3 {
+      font-size: 1.5rem;
+      margin-top: 50px;
+    }
+
+    .pathway .sub {
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+      margin-top: 10px;
+      line-height: 1.55;
+    }
+
+    .pathway .go {
+      margin-top: 20px;
+      font-size: 0.85rem;
+      color: var(--rust-deep);
+    }
+
+    @media(max-width:900px) {
+      .pathway-row {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .pathway:nth-child(2) {
+        border-right: none;
+      }
+
+      .pathway:nth-child(4) {
+        border-right: none;
+      }
+    }
+
+    @media(max-width:560px) {
+      .pathway-row {
+        grid-template-columns: 1fr;
+      }
+
+      .pathway {
+        border-right: none !important;
+      }
+    }
+
+    .home-intro {
+      padding: 90px 0;
+      border-top: 1px solid var(--hair);
+    }
+
+    .home-intro .grid2 {
+      display: grid;
+      grid-template-columns: 0.9fr 1.5fr;
+      gap: 60px;
+    }
+
+    .home-intro h2 {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+    }
+
+    .home-intro .body-col p {
+      font-size: 1.08rem;
+      color: var(--ink-soft);
+      max-width: 62ch;
+    }
+
+    .home-intro .body-col p+p {
+      margin-top: 18px;
+    }
+
+    @media(max-width:800px) {
+      .home-intro .grid2 {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+
+    /* ============ GENERIC PAGE HEADER ============ */
+    .page-head {
+      padding: 70px 0 50px;
+      border-bottom: 1px solid var(--hair);
+    }
+
+    .page-head h1 {
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+    }
+
+    .page-head .dek {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      color: var(--rust-deep);
+      font-size: 1.15rem;
+      margin-top: 14px;
+      max-width: 52ch;
+    }
+
+    .section-block {
+      padding: 64px 0;
+      border-bottom: 1px solid var(--hair);
+    }
+
+    .section-block:last-child {
+      border-bottom: none;
+    }
+
+    .section-block h2 {
+      font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+      margin-bottom: 28px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 0.7fr 1.3fr;
+      gap: 56px;
+    }
+
+    @media(max-width:800px) {
+      .two-col {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+    }
+
+    /* ---------- ABOUT ---------- */
+    .about-lede {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+      font-weight: 400;
+      max-width: 38ch;
+      color: var(--ink);
+    }
+
+    .about-body p {
+      font-size: 1.05rem;
+      color: var(--ink-soft);
+      max-width: 66ch;
+    }
+
+    .about-body p+p {
+      margin-top: 20px;
+    }
+
+    .pull {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      border-left: 2px solid var(--rust);
+      padding-left: 24px;
+      margin: 34px 0;
+      color: var(--ink);
+      max-width: 52ch;
+    }
+
+    /* ---------- SKILLS / TECH ---------- */
+    .skills-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--hair);
+      border-left: 1px solid var(--hair);
+    }
+
+    .skill-cell {
+      border-right: 1px solid var(--hair);
+      border-bottom: 1px solid var(--hair);
+      padding: 22px 22px;
+      font-family: 'Fraunces', serif;
+      font-size: 1.05rem;
+    }
+
+    .skill-cell span {
+      display: block;
+      font-family: 'Work Sans', sans-serif;
+      font-size: 0.8rem;
+      color: var(--sage);
+      margin-top: 4px;
+    }
+
+    @media(max-width:700px) {
+      .skills-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(max-width:440px) {
+      .skills-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .timeline {
+      border-top: 1px solid var(--hair);
+    }
+
+    .tl-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 30px;
+      padding: 26px 0;
+      border-bottom: 1px solid var(--hair);
+    }
+
+    .tl-item .yr {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      color: var(--rust-deep);
+    }
+
+    .tl-item h4 {
+      font-size: 1.15rem;
+      margin-bottom: 6px;
+    }
+
+    .tl-item p {
+      color: var(--ink-soft);
+      font-size: 0.97rem;
+      max-width: 60ch;
+    }
+
+    @media(max-width:600px) {
+      .tl-item {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--hair);
+      border: 1px solid var(--hair);
+    }
+
+    .project-card {
+      background: var(--parchment);
+      padding: 32px;
+    }
+
+    .project-card h4 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .project-card p {
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+    }
+
+    .project-card .tags {
+      margin-top: 14px;
+      font-size: 0.8rem;
+      color: var(--sage);
+      font-style: italic;
+      font-family: 'Fraunces', serif;
+    }
+
+    @media(max-width:700px) {
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ---------- COACHING ---------- */
+    .help-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 36px 50px;
+    }
+
+    .help-item h4 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+
+    .help-item p {
+      color: var(--ink-soft);
+      font-size: 0.96rem;
+    }
+
+    @media(max-width:700px) {
+      .help-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .testimonial {
+      padding: 30px 0;
+      border-bottom: 1px solid var(--hair);
+    }
+
+    .testimonial:last-child {
+      border-bottom: none;
+    }
+
+    .testimonial p.quote {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      max-width: 60ch;
+    }
+
+    .testimonial .who {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: var(--sage);
+    }
+
+    .cta-band {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 64px 0;
+      text-align: left;
+    }
+
+    .cta-band .wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .cta-band h2 {
+      color: var(--paper);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      max-width: 20ch;
+    }
+
+    .cta-band .btn {
+      border-color: var(--paper);
+      color: var(--paper);
+    }
+
+    .cta-band .btn:hover {
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    /* ---------- BOOK ---------- */
+    .book-hero {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 60px;
+      align-items: center;
+      padding: 70px 0;
+    }
+
+    .book-cover {
+      aspect-ratio: 2/3;
+      background: linear-gradient(160deg, var(--ink) 0%, #3a2f28 55%, var(--rust-deep) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px;
+      border: 1px solid var(--hair);
+    }
+
+    .book-cover .bk-title {
+      color: var(--paper);
+      font-family: 'Fraunces', serif;
+      font-size: 1.8rem;
+      line-height: 1.15;
+    }
+
+    .book-cover .bk-sub {
+      color: var(--parchment-deep);
+      font-size: 0.85rem;
+      margin-top: 18px;
+      letter-spacing: 0.04em;
+    }
+
+    .book-cover .bk-by {
+      color: var(--parchment);
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      margin-top: 26px;
+      font-size: 0.95rem;
+    }
+
+    .book-hero h1 {
+      font-size: clamp(2.2rem, 4vw, 3rem);
+    }
+
+    .book-hero .by {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      color: var(--rust-deep);
+      margin-top: 10px;
+      font-size: 1.1rem;
+    }
+
+    .book-hero .intro {
+      margin-top: 24px;
+      font-size: 1.08rem;
+      color: var(--ink-soft);
+      max-width: 56ch;
+    }
+
+    @media(max-width:800px) {
+      .book-hero {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    .theme-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--hair);
+      border: 1px solid var(--hair);
+    }
+
+    .theme-card {
+      background: var(--parchment);
+      padding: 28px;
+    }
+
+    .theme-card h4 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+
+    .theme-card p {
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+    }
+
+    @media(max-width:700px) {
+      .theme-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ---------- DANCE ---------- */
+    .dance-hero {
+      padding: 70px 0;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    @media(max-width:800px) {
+      .dance-hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .gallery-grid .g {
+      aspect-ratio: 3/4;
+      background: linear-gradient(150deg, var(--parchment-deep), var(--sage) 140%);
+      opacity: 0.85;
+    }
+
+    @media(max-width:700px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .video-card {
+      aspect-ratio: 16/9;
+      background: var(--ink);
+      color: var(--parchment);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      text-align: center;
+      padding: 20px;
+    }
+
+    @media(max-width:700px) {
+      .video-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width:480px) {
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ---------- ANATHINKS / BLOG ---------- */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--hair);
+      border: 1px solid var(--hair);
+    }
+
+    .blog-card {
+      background: var(--parchment);
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-height: 220px;
+    }
+
+    .blog-card .tag {
+      font-size: 0.78rem;
+      color: var(--sage);
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+    }
+
+    .blog-card h3 {
+      font-size: 1.3rem;
+    }
+
+    .blog-card p {
+      color: var(--ink-soft);
+      font-size: 0.94rem;
+    }
+
+    .blog-card .read {
+      margin-top: auto;
+      font-size: 0.85rem;
+      color: var(--rust-deep);
+    }
+
+    @media(max-width:700px) {
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ---------- CONTACT ---------- */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      padding: 70px 0;
+    }
+
+    @media(max-width:800px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 34px;
+      }
+    }
+
+    .field {
+      margin-bottom: 22px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--sage);
+      margin-bottom: 8px;
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--hair);
+      padding: 10px 0;
+      font-family: 'Work Sans', sans-serif;
+      font-size: 1rem;
+      color: var(--ink);
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+      border-color: var(--rust);
+      outline: none;
+    }
+
+    .contact-info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+    }
+
+    .contact-info .line {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--hair-soft);
+      font-size: 0.98rem;
+      color: var(--ink-soft);
+    }
+
+    .contact-info .line b {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    footer {
+      border-top: 1px solid var(--hair);
+      padding: 36px 0;
+      margin-top: 0;
+    }
+
+    footer .wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      color: var(--sage);
+    }
+
+    footer .fnav {
+      display: flex;
+      gap: 22px;
+      font-size: 0.85rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .page-enter {
+        animation: none;
+      }
+
+      .hero-image,
+      .hero h1,
+      .hero .tagline {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      .pathway.reveal-ready {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<header class="site-nav">
-  <div class="nav-inner">
-    <a href="#home" class="wordmark">Anagha Sonde</a>
-    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
-    <nav class="primary" id="primaryNav">
-      <a href="#home" data-page="home">Home</a>
-      <a href="#about" data-page="about">About Me</a>
-      <a href="#technology" data-page="technology">Technology</a>
-      <a href="#coaching" data-page="coaching">Life Coaching</a>
-      <a href="#book" data-page="book">My Book</a>
-      <a href="#dance" data-page="dance">Dance</a>
-      <a href="#anathinks" data-page="anathinks">AnaThinks</a>
-      <a href="#contact" data-page="contact">Contact</a>
-    </nav>
-  </div>
-</header>
+  <header class="site-nav">
+    <div class="nav-inner">
+      <a href="#home" class="wordmark">Anagha Sonde</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="primary" id="primaryNav">
+        <a href="#home" data-page="home">Home</a>
+        <a href="#about" data-page="about">About Me</a>
+        <a href="#technology" data-page="technology">Technology</a>
+        <a href="#coaching" data-page="coaching">Life Coaching</a>
+        <a href="#book" data-page="book">My Book</a>
+        <a href="#dance" data-page="dance">Dance</a>
+        <a href="#anathinks" data-page="anathinks">AnaThinks</a>
+        <a href="#contact" data-page="contact">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-<main>
+  <main>
 
-<!-- ============ HOME ============ -->
-<section id="home" class="active">
-  <div class="hero wrap">
-    <div class="hero-banner">
-      <div class="hero-image-wrapper">
-        <img src="DSC06200.JPG" alt="Anagha Sonde" class="hero-image">
-        <div class="hero-overlay"></div>
+    <!-- ============ HOME ============ -->
+    <section id="home" class="active">
+      <div class="hero wrap">
+        <div class="hero-banner">
+          <div class="hero-image-wrapper">
+            <img src="Images/DSC06200.JPG" alt="Anagha Sonde" class="hero-image">
+            <div class="hero-overlay"></div>
+          </div>
+          <div class="hero-grid">
+            <div>
+              <h1>Anagha<br>Sonde</h1>
+              <p class="tagline">Technology. Healing. Creativity. Stories.</p>
+            </div>
+            <div class="hero-side">
+              <p>I am a Life Coach who holds space for transformation, a Technical Architect who builds systems that
+                scale, an Author who writes about self-help, and a Dancer who finds joy in every beat.</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="hero-grid">
+
+      <div class="pathways">
+        <div class="pathway-row">
+          <div class="pathway" onclick="location.hash='technology'">
+            <span class="num">01</span>
+            <div>
+              <h3>Build</h3>
+              <p class="sub">Technical architecture, backend systems, and the craft of designing software that lasts.
+              </p>
+              <p class="go">Enter the technology work</p>
+            </div>
+          </div>
+          <div class="pathway" onclick="location.hash='coaching'">
+            <span class="num">02</span>
+            <div>
+              <h3>Heal</h3>
+              <p class="sub">Life coaching and counselling for people ready to meet themselves honestly.</p>
+              <p class="go">Explore Mind Matters</p>
+            </div>
+          </div>
+          <div class="pathway" onclick="location.hash='book'">
+            <span class="num">03</span>
+            <div>
+              <h3>Write</h3>
+              <p class="sub">"Welcome Back to Yourself" — a memoir about leaving, losing, and returning home to who you
+                are.</p>
+              <p class="go">Read about the book</p>
+            </div>
+          </div>
+          <div class="pathway" onclick="location.hash='dance'">
+            <span class="num">04</span>
+            <div>
+              <h3>Express</h3>
+              <p class="sub">Bollywood and belly dance, performed and taught, as a language older than words.</p>
+              <p class="go">See the dance work</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="home-intro wrap">
+        <div class="grid2">
+          <h2>One person,<br>four practices.</h2>
+          <div class="body-col">
+            <p>Most people are asked to choose a lane. I never could. I've spent my career architecting software systems
+              for companies that needed things to work at scale — and in parallel, I've spent years sitting across from
+              people untangling what isn't working in their lives, writing about my own unraveling and rebuilding, and
+              dancing because some things can only be said with the body.</p>
+            <p>I don't think of these as separate careers stitched together for a website. They're one way of paying
+              attention — to systems, to people, to stories, to rhythm — applied in four different rooms. If you're here
+              for the engineering, welcome. If you're here for the coaching, the book, or the dance, welcome too. You're
+              allowed to be curious about more than one room.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about">
+      <div class="page-head wrap">
+        <p class="eyebrow">About Me</p>
+        <h1>The long way around, on purpose</h1>
+        <p class="dek">A journey across technology, consulting, healing, writing and dance — told the way it actually
+          happened, not the way a resume would tell it.</p>
+      </div>
+
+      <div class="section-block wrap">
+        <div class="two-col">
+          <div class="about-img" style="height: 100%;">
+            <img src="Images/IMG20250207174601.JPG" alt="Anagha Sonde"
+              style="border-radius: 4px; width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <div>
+            <p class="about-lede" style="margin-bottom: 24px;">I didn't plan this life. I built it one honest decision
+              at a time.</p>
+            <div class="about-body">
+              <p>I am a Technical Architect who builds resilient systems, a Life Coach who holds space for
+                transformation,
+                an Author who writes about the interior life, and a dancer who has found her home in movement. These are
+                not separate selves — they are facets of the same person.</p>
+              <p>Hitting rock bottom wasn’t the end—it was the beginning. In the silence of self-doubt and the weight of
+                worthlessness, I found clarity. Stripped of distractions and expectations, I met myself—raw, real, and
+                ready to rebuild. That moment taught me resilience isn’t loud, it’s the quiet decision to rise again. I
+                began journaling, reframing my mindset, and reconnecting with purpose. It pushed me to lead with
+                empathy, create with intention, and build spaces where others feel seen. Hitting rock bottom didn’t
+                break me—it revealed the foundation I needed to grow. And from there, everything changed.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TECHNOLOGY ============ -->
+    <section id="technology">
+      <div class="page-head wrap">
+        <p class="eyebrow">Technology</p>
+        <h1>Technical Architect &amp; Software Developer</h1>
+        <p class="dek">I design and build backend systems and platform architecture that hold up under real-world load —
+          with a particular depth in Java, distributed systems, and applied AI.</p>
+      </div>
+
+      <div class="section-block wrap">
+        <h2>Architecture thinking</h2>
+        <div class="two-col">
+          <div class="about-img" style="height: 100%;">
+            <img src="Images/image_5211c7e3.png" alt="Anagha Sonde"
+              style="border-radius: 4px; width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <div>
+            <p class="eyebrow" style="font-size:1rem; margin-bottom: 24px;">How I approach a system</p>
+            <div class="about-body">
+              <p>Good architecture is a series of decisions you can defend two years later, under different requirements
+                than the ones you started with. I design for change: services with clear boundaries, contracts that
+                don't
+                leak implementation detail, and infrastructure that scales without demanding a rewrite every time
+                traffic
+                doubles.</p>
+              <p>I care about the boring things that make systems trustworthy — observability, failure isolation, sane
+                deployment pipelines — as much as the exciting things, like where AI and LLM integration can genuinely
+                improve a product rather than just decorate it. And because I've led technical teams, I design with the
+                humans who'll maintain the system in mind, not just the humans who'll launch it.</p>
+            </div>
+          </div>
+        </div>
+        <br />
         <div>
-          <h1>Anagha<br>Sonde</h1>
-          <p class="tagline">Technology. Healing. Creativity. Stories.</p>
-        </div>
-        <div class="hero-side">
-          <p>I build systems that scale, hold space for people rebuilding themselves, write about the long way back to your own life, and move to rhythms that ask nothing of me but presence.</p>
+          <p>
+            I have spent over a decade designing software systems — the kind that serve millions of users, survive
+            unexpected load, and can be understood by the engineers who inherit them. I came up through Java and Spring
+            Boot, grew into cloud-native architecture on AWS, and have spent the last few years integrating AI and LLM
+            capabilities into enterprise platforms. What I love most about architecture is not the technology — it is
+            the thinking. The discipline of asking: what is this system actually for? What will break it? What will it
+            look like in five years? I bring that same quality of thinking to every engagement.
+
+          <ul>
+            <li><strong>Cloud-native microservices</strong> on AWS</li>
+            <li><strong>Event-driven systems</strong> with Kafka</li>
+            <li><strong>AI/LLM integration</strong> and RAG pipelines</li>
+            <li><strong>Engineering leadership</strong> and mentorship</li>
+          </ul>
+          </p>
         </div>
       </div>
-    </div>
-  </div>
 
-  <div class="pathways">
-    <div class="pathway-row">
-      <div class="pathway" onclick="location.hash='technology'">
-        <span class="num">01</span>
+      <div class="section-block wrap">
+        <h2>Technical skills</h2>
+        <div class="skills-list">
+          <div class="skill-cell">Technical Architecture <span>Systems &amp; platform design</span></div>
+          <div class="skill-cell">Java <span>Core language depth</span></div>
+          <div class="skill-cell">Spring Boot <span>Enterprise backend</span></div>
+          <div class="skill-cell">Microservices <span>Distributed systems</span></div>
+          <div class="skill-cell">AWS <span>Cloud infrastructure</span></div>
+          <div class="skill-cell">Kafka <span>Event streaming</span></div>
+          <div class="skill-cell">Docker / Kubernetes <span>Containers &amp; orchestration</span></div>
+          <div class="skill-cell">Python / FastAPI <span>Services &amp; tooling</span></div>
+          <div class="skill-cell">React <span>Frontend engineering</span></div>
+          <div class="skill-cell">AI / LLM Integration <span>Applied AI in production</span></div>
+          <div class="skill-cell">System Design <span>Scalable architecture</span></div>
+          <div class="skill-cell">Technical Leadership <span>Teams &amp; mentorship</span></div>
+        </div>
+      </div>
+
+      <div class="section-block wrap">
+        <h2>Experience</h2>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="yr">Recent</div>
+            <div>
+              <h4>Technical Architect</h4>
+              <p>Leading architecture decisions across backend and platform services, mentoring engineering teams, and
+                integrating AI/LLM capabilities into existing product lines without disrupting what already works.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="yr">Prior</div>
+            <div>
+              <h4>Senior Software Engineer / Consultant</h4>
+              <p>Delivered enterprise-grade Java and Spring Boot systems for clients with demanding scale and
+                reliability requirements, working across microservices, event-driven architecture, and cloud
+                infrastructure.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="yr">Earlier</div>
+            <div>
+              <h4>Software Developer</h4>
+              <p>Built the foundation — core backend development, database design, and the habit of writing code that
+                the next engineer would thank you for.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-block wrap">
+        <h2>Selected projects</h2>
+        <div class="project-grid">
+          <div class="project-card">
+            <h4>Event-driven order platform</h4>
+            <p>Re-architected a monolithic vehicle ordering system into a Kafka-based event-driven platform for an
+              eCommerce system serving 1M+ global users, ensuring eventual consistency and low-latency workflows.</p>
+            <div class="tags">Java · Kafka · Microservices · AWS</div>
+          </div>
+          <div class="project-card">
+            <h4>AI-assisted internal wellness platform</h4>
+            <p>Designed and shipped an LLM-integrated mental wellness platform featuring AI-generated journal summaries,
+              reflection prompts, and intelligent recommendation services.</p>
+            <div class="tags">Java · Spring Boot · AWS · Kafka</div>
+          </div>
+          <div class="project-card">
+            <h4>Travel inventory &amp; pricing system</h4>
+            <p>Built high-availability backend systems for real-time travel inventory and pricing management, leveraging
+              fault-tolerant microservices and Kafka-based event streaming.</p>
+            <div class="tags">Java · Spring Boot · AWS · KafkaKubernetes</div>
+          </div>
+          <div class="project-card">
+            <h4>Hackathon workspace application</h4>
+            <p>Architected and implemented a full-stack hackathon solution from the ground up, utilizing AI-assisted
+              development tools to rapidly prototype the UI and build scalable backend APIs.</p>
+            <div class="tags">Python · Fast API · React JS · Cursor</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LIFE COACHING ============ -->
+    <section id="coaching">
+      <div class="page-head wrap">
+        <p class="eyebrow">Life Coaching · Mind Matters</p>
+        <h1>Mind Matters</h1>
+        <p class="dek">Coaching and counselling for people who are ready to stop managing their lives and start actually
+          living them.</p>
+      </div>
+
+      <div class="section-block wrap">
+        <h2>My approach</h2>
+        <div class="two-col">
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <p class="eyebrow" style="font-size:1rem;">Grounded, not prescriptive</p>
+            <div class="about-img" style="flex-grow: 1;">
+              <img src="Images/image_210887.png" alt="Anagha Sonde Coaching"
+                style="border-radius: 4px; width: 100%; height: 100%; object-fit: cover;">
+            </div>
+          </div>
+          <div class="about-body">
+            <br /><br />
+            <p>I don't believe in handing people a five-step plan to a life they haven't examined. My approach starts
+              with listening long enough to understand what's actually happening beneath the presenting problem — the
+              job stress that's really a boundaries issue, the relationship conflict that's really an old wound
+              repeating itself. Often, what brings us into a session is only the visible layer of something deeper: an
+              unmet need, a fear we've learned to live with, a pattern we've unconsciously carried forward, or a version
+              of ourselves we've outgrown. Before looking for answers, I believe we need the courage and patience to
+              understand the question itself.</p>
+            <p>I bring the same diagnostic patience I use in technical architecture to this work: understand the real
+              system before proposing a fix. People aren't problems to be solved, and emotions aren't bugs to be
+              eliminated; they are signals worth understanding. Sessions are collaborative, honest, and unhurried. I'll
+              ask the direct question when it needs asking, challenge a belief when it may be holding you back, and sit
+              with you in the harder moments without rushing you toward resolution. My role isn't to tell you who to
+              become, but to help you hear yourself clearly enough to decide what comes next — with greater
+              self-awareness, stronger boundaries, and a life that feels genuinely yours.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-block wrap">
+        <h2>Areas I help with</h2>
+        <div class="help-grid">
+          <div class="help-item">
+            <h4>Life transitions</h4>
+            <p>Career changes, identity shifts, and the disorienting middle of "who am I now."</p>
+          </div>
+          <div class="help-item">
+            <h4>Self-worth &amp; self-trust</h4>
+            <p>Rebuilding a relationship with yourself after years of performing for everyone else.</p>
+          </div>
+          <div class="help-item">
+            <h4>Relationships</h4>
+            <p>Patterns in partnership, family, and friendship that keep repeating until they're named.</p>
+          </div>
+          <div class="help-item">
+            <h4>Burnout &amp; overwhelm</h4>
+            <p>Especially common among high-achieving professionals who've stopped noticing their own limits.</p>
+          </div>
+          <div class="help-item">
+            <h4>Grief &amp; loss</h4>
+            <p>Of a relationship, a version of yourself, or a life you thought you'd have.</p>
+          </div>
+          <div class="help-item">
+            <h4>Purpose &amp; direction</h4>
+            <p>For people who are doing "fine" on paper and quietly unsettled everywhere else.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-block wrap">
+        <h2>Coaching &amp; counselling</h2>
+        <div class="two-col">
+          <p class="eyebrow" style="font-size:1rem;">How we work together</p>
+          <div class="about-body">
+            <p>I offer both structured coaching engagements — for people working toward a specific change — and
+              open-ended counselling conversations for people who need space more than a plan. Sessions are one-on-one,
+              held over video or in person, and paced to what you actually need rather than a fixed program.</p>
+            <p>Most people start with a single conversation. There's no obligation to continue, and no pressure to have
+              your problem "figured out" before you show up.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-block wrap">
+        <h2>Testimonials</h2>
+        <div class="testimonial">
+          <p class="quote">Anagha didn't try to fix me in the first session. She asked better questions than anyone else
+            had, and let me sit with my own answers.</p>
+          <p class="who">— Client, career transition coaching</p>
+        </div>
+        <div class="testimonial">
+          <p class="quote">I came in stuck on a work problem and left understanding something about my marriage. That's
+            the kind of clarity she brings.</p>
+          <p class="who">— Client, ongoing counselling</p>
+        </div>
+        <div class="testimonial">
+          <p class="quote">She has a rare mix of warmth and directness. You feel held and also gently pushed, at the
+            same time.</p>
+          <p class="who">— Client, six-month coaching engagement</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BOOK ============ -->
+    <section id="book">
+      <div class="book-hero wrap">
+        <div class="book-cover">
+          <img src="Images/IMG-20260901-WA0012.jpg" alt="Book Cover"
+            style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
         <div>
-          <h3>Build</h3>
-          <p class="sub">Technical architecture, backend systems, and the craft of designing software that lasts.</p>
-          <p class="go">Enter the technology work</p>
+          <p class="eyebrow">My Book</p>
+          <h1>Welcome Back to Yourself</h1>
+          <p class="by">A memoir by Anagha Sonde</p>
+          <p class="intro">This is the book I needed and couldn't find — an honest account of losing my footing, hitting
+            rock bottom, the years it took to find it again, and everything I learned about identity, worth, and home
+            along the way. It's
+            a memoir that happens to be useful.</p>
+          <div style="margin-top:30px; display:flex; gap:16px; flex-wrap:wrap;">
+            <a href="https://www.amazon.in/"" target=" _blank" class="btn solid">Buy the book</a>
+            <a href="#excerpts" class="btn">Read an excerpt</a>
+          </div>
         </div>
       </div>
-      <div class="pathway" onclick="location.hash='coaching'">
-        <span class="num">02</span>
-        <div>
-          <h3>Heal</h3>
-          <p class="sub">Life coaching and counselling for people ready to meet themselves honestly.</p>
-          <p class="go">Explore Mind Matters</p>
+
+      <div class="section-block wrap">
+        <h2>Themes</h2>
+        <div class="theme-list">
+          <div class="theme-card">
+            <h4>Finding Yourself Beneath the Noise</h4>
+            <p>Unlearning the identities, expectations, and stories that were never truly yours.</p>
+          </div>
+          <div class="theme-card">
+            <h4>The Journey Back Home</h4>
+            <p>Rediscovering your voice, your boundaries, and the person you were before you lost your way.</p>
+          </div>
+          <div class="theme-card">
+            <h4>Learning to Choose Yourself</h4>
+            <p>Understanding that your worth was never dependent on being chosen, needed, or understood by someone else.
+            </p>
+          </div>
         </div>
       </div>
-      <div class="pathway" onclick="location.hash='book'">
-        <span class="num">03</span>
-        <div>
-          <h3>Write</h3>
-          <p class="sub">"Welcome Back to Yourself" — a memoir about leaving, losing, and returning home to who you are.</p>
-          <p class="go">Read about the book</p>
+
+      <div class="section-block wrap">
+        <h2>About the book</h2>
+        <div class="two-col">
+          <p class="eyebrow" style="font-size:1rem;">Welcome Back to Yourself</p>
+          <div class="about-body">
+            <p>Welcome Back to Yourself is a memoir about loss, reinvention, and the slow, brave work of choosing
+              yourself again. It journeys through the moments that can quietly change the course of a life — heartbreak,
+              betrayal, loneliness, family wounds, endings, uncertainty, and the uncomfortable spaces in between who we
+              were and who we are becoming. It is honest in the way that only personal writing can be: raw in places,
+              tender in others, reflective without pretending to have all the answers, and ultimately, deeply hopeful.
+              Through memories, reflections, letters, life experiences, travel, and conversations with the self, the
+              book explores what it means to rebuild your relationship with yourself when life no longer looks the way
+              you imagined it would.</p>
+          </div>
         </div>
       </div>
-      <div class="pathway" onclick="location.hash='dance'">
-        <span class="num">04</span>
-        <div>
-          <h3>Express</h3>
-          <p class="sub">Bollywood and belly dance, performed and taught, as a language older than words.</p>
-          <p class="go">See the dance work</p>
+
+      <section id="excerpts">
+        <div class="section-block wrap">
+          <h2>Excerpts</h2>
+          <div class="two-col">
+            <p class="eyebrow" style="font-size:1rem;">Excerpt-1</p>
+            <div class="about-body">
+              <p>"This is the moment of your rising. You have understood that the tunnel need not end in someone else's
+                light-it can begin with your own flame. That matchstick you hold is small, but it sacred, because it is
+                yours. "</p>
+            </div>
+            <p class="eyebrow" style="font-size:1rem;">Excerpt-2</p>
+            <div class="about-body">
+              <p>"Love was lost, yes. But in the loss, I found something greater: the beginning of myself. I decided
+                that
+                if there was no light at the end of the tunnel, I would not wait for someone else to bring it. I would
+                strike a goddamn matchstick and light it myself. That moment was a vow: I would become my own biggest
+                support, my own loudest cheerleader."</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-block wrap">
+        <h2>Reader feedback</h2>
+        <div class="testimonial">
+          <p class="quote">I underlined something on nearly every page. It felt like she was narrating my own quiet
+            unraveling back to me.</p>
+          <p class="who">— Reader review</p>
+        </div>
+        <div class="testimonial">
+          <p class="quote">Not another wellness book. This one earns its wisdom by showing the mess first.</p>
+          <p class="who">— Reader review</p>
         </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="home-intro wrap">
-    <div class="grid2">
-      <h2>One person,<br>four practices.</h2>
-      <div class="body-col">
-        <p>Most people are asked to choose a lane. I never could. I've spent my career architecting software systems for companies that needed things to work at scale — and in parallel, I've spent years sitting across from people untangling what isn't working in their lives, writing about my own unraveling and rebuilding, and dancing because some things can only be said with the body.</p>
-        <p>I don't think of these as separate careers stitched together for a website. They're one way of paying attention — to systems, to people, to stories, to rhythm — applied in four different rooms. If you're here for the engineering, welcome. If you're here for the coaching, the book, or the dance, welcome too. You're allowed to be curious about more than one room.</p>
+    <!-- ============ DANCE ============ -->
+    <section id="dance">
+      <div class="page-head wrap">
+        <p class="eyebrow">Dance</p>
+        <h1>Bollywood &amp; Belly Dance</h1>
+        <p class="dek">The part of my life that has never needed a business case — performed, taught, and lived in the
+          body.</p>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- ============ ABOUT ============ -->
-<section id="about">
-  <div class="page-head wrap">
-    <p class="eyebrow">About Me</p>
-    <h1>The long way around, on purpose</h1>
-    <p class="dek">A journey across technology, consulting, healing, writing and dance — told the way it actually happened, not the way a resume would tell it.</p>
-  </div>
-
-  <div class="section-block wrap">
-    <div class="two-col">
-      <p class="about-lede">I didn't plan this life. I built it one honest decision at a time.</p>
-      <div class="about-body">
-        <p>I started in software the way a lot of engineers do — curious about how things worked, good at solving problems that had clean edges. Over the years, as I moved from writing code to architecting systems and leading technical teams, I noticed something: the hardest problems in any system were never really about the system. They were about the people building it, using it, depending on it. Architecture, I learned, is as much about people as it is about servers.</p>
-        <p class="pull">I stopped trying to keep the different parts of myself in separate rooms. It turns out they were always talking to each other.</p>
-        <p>Somewhere in the middle of a demanding technical career, my own life asked for an audit. I went through a period I now write about openly — one that took apart most of what I thought I knew about who I was. Coming back from that, slowly and without a map, is what led me to counselling and coaching. Not as a pivot away from technology, but as an addition to it. I understand systems under pressure. I understand people under pressure too. The training was different; the underlying skill — staying calm, diagnosing carefully, rebuilding thoughtfully — was the same.</p>
-        <p>Writing "Welcome Back to Yourself" was the natural next step. I needed to say, in full sentences and without editing myself for anyone's comfort, what that unraveling and rebuilding actually felt like. And dance — Bollywood first, belly dance later — has been the one part of my life that never needed to justify itself. It's the practice I return to when I want to feel like a body again, not just a mind managing several careers.</p>
-        <p>Today I still architect software. I still coach. I still write. I still dance, and I teach others to. This site is an honest map of all four — not a highlight reel, but a real one.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ TECHNOLOGY ============ -->
-<section id="technology">
-  <div class="page-head wrap">
-    <p class="eyebrow">Technology</p>
-    <h1>Technical Architect &amp; Software Developer</h1>
-    <p class="dek">I design and build backend systems and platform architecture that hold up under real-world load — with a particular depth in Java, distributed systems, and applied AI.</p>
-  </div>
-
-  <div class="section-block wrap">
-    <h2>Architecture thinking</h2>
-    <div class="two-col">
-      <p class="eyebrow" style="font-size:1rem;">How I approach a system</p>
-      <div class="about-body">
-        <p>Good architecture is a series of decisions you can defend two years later, under different requirements than the ones you started with. I design for change: services with clear boundaries, contracts that don't leak implementation detail, and infrastructure that scales without demanding a rewrite every time traffic doubles.</p>
-        <p>I care about the boring things that make systems trustworthy — observability, failure isolation, sane deployment pipelines — as much as the exciting things, like where AI and LLM integration can genuinely improve a product rather than just decorate it. And because I've led technical teams, I design with the humans who'll maintain the system in mind, not just the humans who'll launch it.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-block wrap">
-    <h2>Technical skills</h2>
-    <div class="skills-list">
-      <div class="skill-cell">Technical Architecture <span>Systems &amp; platform design</span></div>
-      <div class="skill-cell">Java <span>Core language depth</span></div>
-      <div class="skill-cell">Spring Boot <span>Enterprise backend</span></div>
-      <div class="skill-cell">Microservices <span>Distributed systems</span></div>
-      <div class="skill-cell">AWS <span>Cloud infrastructure</span></div>
-      <div class="skill-cell">Kafka <span>Event streaming</span></div>
-      <div class="skill-cell">Docker / Kubernetes <span>Containers &amp; orchestration</span></div>
-      <div class="skill-cell">Python / FastAPI <span>Services &amp; tooling</span></div>
-      <div class="skill-cell">React <span>Frontend engineering</span></div>
-      <div class="skill-cell">AI / LLM Integration <span>Applied AI in production</span></div>
-      <div class="skill-cell">System Design <span>Scalable architecture</span></div>
-      <div class="skill-cell">Technical Leadership <span>Teams &amp; mentorship</span></div>
-    </div>
-  </div>
-
-  <div class="section-block wrap">
-    <h2>Experience</h2>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="yr">Recent</div>
-        <div>
-          <h4>Technical Architect</h4>
-          <p>Leading architecture decisions across backend and platform services, mentoring engineering teams, and integrating AI/LLM capabilities into existing product lines without disrupting what already works.</p>
+      <div class="dance-hero wrap">
+        <div class="about-body">
+          <p class="pull" style="margin-top:0;">Dance is the one place all my other titles disappear.</p>
+          <p>I grew up around Bollywood dance — its storytelling, its unapologetic expressiveness, its refusal to be
+            subtle when subtlety isn't the point. Belly dance came later, and taught me something different: precision,
+            isolation, the discipline of a body that knows exactly what each muscle is doing while still looking
+            effortless.</p>
+          <p>Together, they've become a practice I return to constantly — as a performer, and increasingly as a teacher
+            for others discovering the same joy.</p>
+        </div>
+        <div class="about-body">
+          <h3 style="font-size:1.2rem; margin-bottom:10px;">My dance journey</h3>
+          <p>From childhood Bollywood routines at family functions to formal training in belly dance technique, my
+            journey has been about following what felt alive, not what looked impressive on paper. I still train
+            regularly, and I still get nervous before a performance — which I've decided is the correct amount of
+            respect to have for this art form.</p>
         </div>
       </div>
-      <div class="tl-item">
-        <div class="yr">Prior</div>
-        <div>
-          <h4>Senior Software Engineer / Consultant</h4>
-          <p>Delivered enterprise-grade Java and Spring Boot systems for clients with demanding scale and reliability requirements, working across microservices, event-driven architecture, and cloud infrastructure.</p>
+
+      <div class="section-block wrap">
+        <h2>Performance</h2>
+        <p class="about-body" style="max-width:66ch; color:var(--ink-soft);">I perform at community events, private
+          functions, and showcases, blending Bollywood's narrative energy with the technical control of belly dance.
+          Available for bookings — get in touch for availability and rates.</p>
+      </div>
+
+      <div class="section-block wrap">
+        <h2>Teaching</h2>
+        <p class="about-body" style="max-width:66ch; color:var(--ink-soft); margin-bottom:24px;">I teach both styles to
+          students at every level, from complete beginners to those preparing for performance. Classes focus on
+          technique, musicality, and — just as important — the confidence to actually enjoy moving.</p>
+        <div class="help-grid">
+          <div class="help-item">
+            <h4>Beginner Bollywood</h4>
+            <p>Foundational steps, expression, and choreography for total beginners.</p>
+          </div>
+          <div class="help-item">
+            <h4>Belly dance technique</h4>
+            <p>Isolations, posture, and the technical vocabulary of the form.</p>
+          </div>
+          <div class="help-item">
+            <h4>Choreography workshops</h4>
+            <p>Group sessions building a full routine from scratch.</p>
+          </div>
+          <div class="help-item">
+            <h4>Private sessions</h4>
+            <p>One-on-one coaching for performance prep or personal growth.</p>
+          </div>
         </div>
       </div>
-      <div class="tl-item">
-        <div class="yr">Earlier</div>
-        <div>
-          <h4>Software Developer</h4>
-          <p>Built the foundation — core backend development, database design, and the habit of writing code that the next engineer would thank you for.</p>
+
+      <div class="section-block wrap">
+        <h2>Gallery</h2>
+        <div class="gallery-grid">
+          <div class="g"></div>
+          <div class="g"></div>
+          <div class="g"></div>
+          <div class="g"></div>
+          <div class="g"></div>
+          <div class="g"></div>
+          <div class="g"></div>
+          <div class="g"></div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <div class="section-block wrap">
-    <h2>Selected projects</h2>
-    <div class="project-grid">
-      <div class="project-card">
-        <h4>Event-driven order platform</h4>
-        <p>Re-architected a monolithic order-processing system into a Kafka-based event-driven platform, cutting processing latency and enabling independent team deployments.</p>
-        <div class="tags">Java · Kafka · Microservices · AWS</div>
+      <div class="section-block wrap">
+        <h2>Videos</h2>
+        <div class="video-grid">
+          <div class="video-card">Performance reel<br>— coming soon</div>
+          <div class="video-card">Teaching highlights<br>— coming soon</div>
+          <div class="video-card">Behind the choreography<br>— coming soon</div>
+        </div>
       </div>
-      <div class="project-card">
-        <h4>AI-assisted internal tooling</h4>
-        <p>Designed and shipped an LLM-integrated internal tool that reduced manual triage time for support and engineering teams through intelligent summarization and routing.</p>
-        <div class="tags">Python · FastAPI · LLM Integration</div>
-      </div>
-      <div class="project-card">
-        <h4>Cloud migration &amp; modernization</h4>
-        <p>Led the migration of legacy infrastructure to a containerized, Kubernetes-orchestrated environment on AWS, improving deployment frequency and system resilience.</p>
-        <div class="tags">AWS · Docker · Kubernetes</div>
-      </div>
-      <div class="project-card">
-        <h4>Customer-facing dashboard rebuild</h4>
-        <p>Partnered with product and design to rebuild a customer analytics dashboard in React, backed by a redesigned Spring Boot API layer.</p>
-        <div class="tags">React · Spring Boot · System Design</div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ============ LIFE COACHING ============ -->
-<section id="coaching">
-  <div class="page-head wrap">
-    <p class="eyebrow">Life Coaching · Mind Matters</p>
-    <h1>Mind Matters</h1>
-    <p class="dek">Coaching and counselling for people who are ready to stop managing their lives and start actually living them.</p>
-  </div>
+    <!-- ============ ANATHINKS ============ -->
+    <section id="anathinks">
+      <div class="page-head wrap">
+        <p class="eyebrow">AnaThinks</p>
+        <h1>Thoughts on self-love, healing &amp; the rest of it</h1>
+        <p class="dek">A running notebook on psychology, relationships, personal growth, and the small observations that
+          add up to a life.</p>
+      </div>
 
-  <div class="section-block wrap">
-    <h2>My approach</h2>
-    <div class="two-col">
-      <p class="eyebrow" style="font-size:1rem;">Grounded, not prescriptive</p>
-      <div class="about-body">
-        <p>I don't believe in handing people a five-step plan to a life they haven't examined. My approach starts with listening long enough to understand what's actually happening beneath the presenting problem — the job stress that's really a boundaries issue, the relationship conflict that's really an old wound repeating itself.</p>
-        <p>I bring the same diagnostic patience I use in technical architecture to this work: understand the real system before proposing a fix. Sessions are collaborative, honest, and unhurried. I'll ask the direct question when it needs asking, and I'll sit with you in the harder moments without rushing you toward resolution.</p>
+      <div class="section-block wrap">
+        <div class="blog-grid">
+          <div class="blog-card">
+            <p class="tag">Self-love</p>
+            <h3>The difference between self-love and self-indulgence</h3>
+            <p>One asks "what do I actually need," the other asks "what will make this feeling go away." They look
+              similar from the outside. They are not the same thing.</p>
+            <p class="read">Read the piece</p>
+          </div>
+          <div class="blog-card">
+            <p class="tag">Relationships</p>
+            <h3>Why we repeat the relationship we swore we'd never repeat</h3>
+            <p>Patterns aren't punishments. They're just unfinished business, showing up in a new outfit until we
+              finally look at it directly.</p>
+            <p class="read">Read the piece</p>
+          </div>
+          <div class="blog-card">
+            <p class="tag">Healing</p>
+            <h3>Healing isn't linear, but it does have a direction</h3>
+            <p>You will have worse days after good ones. That doesn't mean you're back at the start — it means healing
+              was never a straight line to begin with.</p>
+            <p class="read">Read the piece</p>
+          </div>
+          <div class="blog-card">
+            <p class="tag">Psychology</p>
+            <h3>The stories we tell about who we are — and who wrote them</h3>
+            <p>Most of the beliefs you hold about yourself were written by someone else, at a time when you had no way
+              of arguing back.</p>
+            <p class="read">Read the piece</p>
+          </div>
+          <div class="blog-card">
+            <p class="tag">Personal growth</p>
+            <h3>On doing the hard thing before you feel ready</h3>
+            <p>Readiness is a feeling, not a prerequisite. Most of what I'm proud of, I did while still scared.</p>
+            <p class="read">Read the piece</p>
+          </div>
+          <div class="blog-card">
+            <p class="tag">Life lessons</p>
+            <h3>What architecture taught me about rebuilding a life</h3>
+            <p>You don't tear down the whole system to fix one broken part. You isolate it, understand it, and replace
+              it carefully — the same is true of a life.</p>
+            <p class="read">Read the piece</p>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="section-block wrap">
-    <h2>Areas I help with</h2>
-    <div class="help-grid">
-      <div class="help-item">
-        <h4>Life transitions</h4>
-        <p>Career changes, identity shifts, and the disorienting middle of "who am I now."</p>
+    <!-- ============ CONTACT ============ -->
+    <section id="contact">
+      <div class="page-head wrap">
+        <p class="eyebrow">Contact</p>
+        <h1>Let's start a conversation</h1>
+        <p class="dek">Whether you're hiring, seeking coaching, curious about the book, or interested in a dance class
+          or performance — reach out.</p>
       </div>
-      <div class="help-item">
-        <h4>Self-worth &amp; self-trust</h4>
-        <p>Rebuilding a relationship with yourself after years of performing for everyone else.</p>
-      </div>
-      <div class="help-item">
-        <h4>Relationships</h4>
-        <p>Patterns in partnership, family, and friendship that keep repeating until they're named.</p>
-      </div>
-      <div class="help-item">
-        <h4>Burnout &amp; overwhelm</h4>
-        <p>Especially common among high-achieving professionals who've stopped noticing their own limits.</p>
-      </div>
-      <div class="help-item">
-        <h4>Grief &amp; loss</h4>
-        <p>Of a relationship, a version of yourself, or a life you thought you'd have.</p>
-      </div>
-      <div class="help-item">
-        <h4>Purpose &amp; direction</h4>
-        <p>For people who are doing "fine" on paper and quietly unsettled everywhere else.</p>
-      </div>
-    </div>
-  </div>
 
-  <div class="section-block wrap">
-    <h2>Coaching &amp; counselling</h2>
-    <div class="two-col">
-      <p class="eyebrow" style="font-size:1rem;">How we work together</p>
-      <div class="about-body">
-        <p>I offer both structured coaching engagements — for people working toward a specific change — and open-ended counselling conversations for people who need space more than a plan. Sessions are one-on-one, held over video or in person, and paced to what you actually need rather than a fixed program.</p>
-        <p>Most people start with a single conversation. There's no obligation to continue, and no pressure to have your problem "figured out" before you show up.</p>
+      <div class="contact-grid wrap">
+        <form
+          onsubmit="event.preventDefault(); alert('Thank you — this form is a placeholder and not yet connected to an inbox.');">
+          <div class="field">
+            <label for="cName">Name</label>
+            <input id="cName" type="text" required>
+          </div>
+          <div class="field">
+            <label for="cEmail">Email</label>
+            <input id="cEmail" type="email" required>
+          </div>
+          <div class="field">
+            <label for="cReason">What are you reaching out about?</label>
+            <select id="cReason">
+              <option>Technology / hiring</option>
+              <option>Life coaching / counselling</option>
+              <option>The book</option>
+              <option>Dance classes or performance</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="cMsg">Message</label>
+            <textarea id="cMsg" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn solid">Send message</button>
+        </form>
+        <div class="contact-info">
+          <h3>Other ways to reach me</h3>
+          <div class="line"><b>Email</b> — hello@anaghasonde.com</div>
+          <div class="line"><b>LinkedIn</b> — for technology &amp; hiring conversations</div>
+          <div class="line"><b>Instagram</b> — for dance &amp; AnaThinks</div>
+          <div class="line"><b>Book a session</b> — for coaching &amp; counselling enquiries</div>
+        </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="section-block wrap">
-    <h2>Testimonials</h2>
-    <div class="testimonial">
-      <p class="quote">Anagha didn't try to fix me in the first session. She asked better questions than anyone else had, and let me sit with my own answers.</p>
-      <p class="who">— Client, career transition coaching</p>
-    </div>
-    <div class="testimonial">
-      <p class="quote">I came in stuck on a work problem and left understanding something about my marriage. That's the kind of clarity she brings.</p>
-      <p class="who">— Client, ongoing counselling</p>
-    </div>
-    <div class="testimonial">
-      <p class="quote">She has a rare mix of warmth and directness. You feel held and also gently pushed, at the same time.</p>
-      <p class="who">— Client, six-month coaching engagement</p>
-    </div>
-  </div>
-</section>
+  </main>
 
-<!-- ============ BOOK ============ -->
-<section id="book">
-  <div class="book-hero wrap">
-    <div class="book-cover">
-      <p class="bk-title">Welcome Back<br>to Yourself</p>
-      <p class="bk-sub">A MEMOIR</p>
-      <p class="bk-by">Anagha Sonde</p>
-    </div>
-    <div>
-      <p class="eyebrow">My Book</p>
-      <h1>Welcome Back to Yourself</h1>
-      <p class="by">A memoir by Anagha Sonde</p>
-      <p class="intro">This is the book I needed and couldn't find — an honest account of losing my footing, the years it took to find it again, and everything I learned about identity, worth, and home along the way. It isn't a self-help book pretending to be a memoir. It's a memoir that happens to be useful.</p>
-      <div style="margin-top:30px; display:flex; gap:16px; flex-wrap:wrap;">
-        <a href="#" class="btn solid">Buy the book</a>
-        <a href="#" class="btn">Read an excerpt</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-block wrap">
-    <h2>Themes</h2>
-    <div class="theme-list">
-      <div class="theme-card">
-        <h4>Identity &amp; unraveling</h4>
-        <p>What happens when the person you built yourself to be stops fitting.</p>
-      </div>
-      <div class="theme-card">
-        <h4>Coming home to yourself</h4>
-        <p>The slow, unglamorous work of rebuilding a self you can trust.</p>
-      </div>
-      <div class="theme-card">
-        <h4>Belonging &amp; worth</h4>
-        <p>Learning that you don't have to earn the right to exist as you are.</p>
+  <footer>
+    <div class="wrap">
+      <p>© 2026 Anagha Sonde. All rights reserved.</p>
+      <div class="fnav">
+        <a href="#about">About</a>
+        <a href="#book">Book</a>
+        <a href="#contact">Contact</a>
       </div>
     </div>
-  </div>
+  </footer>
 
-  <div class="section-block wrap">
-    <h2>About the author</h2>
-    <div class="two-col">
-      <p class="eyebrow" style="font-size:1rem;">Anagha Sonde</p>
-      <div class="about-body">
-        <p>Anagha Sonde is a technical architect, life coach, and dancer whose work all circles the same question in different languages: how do we build things — systems, selves, relationships — that actually hold? "Welcome Back to Yourself" is her first book, written from the part of her story that doesn't show up on a resume.</p>
-      </div>
-    </div>
-  </div>
+  <script>
+    const sections = document.querySelectorAll('main > section[id]');
+    const navLinks = document.querySelectorAll('nav.primary a');
+    const menuBtn = document.getElementById('menuBtn');
+    const primaryNav = document.getElementById('primaryNav');
 
-  <div class="section-block wrap">
-    <h2>Reader feedback</h2>
-    <div class="testimonial">
-      <p class="quote">I underlined something on nearly every page. It felt like she was narrating my own quiet unraveling back to me.</p>
-      <p class="who">— Reader review</p>
-    </div>
-    <div class="testimonial">
-      <p class="quote">Not another wellness book. This one earns its wisdom by showing the mess first.</p>
-      <p class="who">— Reader review</p>
-    </div>
-  </div>
-</section>
+    function showPage(id) {
+      sections.forEach(s => {
+        if (s.id === id) {
+          s.classList.add('active');
+          s.classList.remove('page-enter');
+          void s.offsetWidth;
+          s.classList.add('page-enter');
+        } else {
+          s.classList.remove('active');
+        }
+      });
+      navLinks.forEach(a => a.classList.toggle('active', a.dataset.page === id));
+      window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+      primaryNav.classList.remove('open');
+    }
 
-<!-- ============ DANCE ============ -->
-<section id="dance">
-  <div class="page-head wrap">
-    <p class="eyebrow">Dance</p>
-    <h1>Bollywood &amp; Belly Dance</h1>
-    <p class="dek">The part of my life that has never needed a business case — performed, taught, and lived in the body.</p>
-  </div>
+    function routeFromHash() {
+      const id = (location.hash || '#home').replace('#', '');
+      const valid = ['home', 'about', 'technology', 'coaching', 'book', 'dance', 'anathinks', 'contact'];
+      showPage(valid.includes(id) ? id : 'home');
+    }
 
-  <div class="dance-hero wrap">
-    <div class="about-body">
-      <p class="pull" style="margin-top:0;">Dance is the one place all my other titles disappear.</p>
-      <p>I grew up around Bollywood dance — its storytelling, its unapologetic expressiveness, its refusal to be subtle when subtlety isn't the point. Belly dance came later, and taught me something different: precision, isolation, the discipline of a body that knows exactly what each muscle is doing while still looking effortless.</p>
-      <p>Together, they've become a practice I return to constantly — as a performer, and increasingly as a teacher for others discovering the same joy.</p>
-    </div>
-    <div class="about-body">
-      <h3 style="font-size:1.2rem; margin-bottom:10px;">My dance journey</h3>
-      <p>From childhood Bollywood routines at family functions to formal training in belly dance technique, my journey has been about following what felt alive, not what looked impressive on paper. I still train regularly, and I still get nervous before a performance — which I've decided is the correct amount of respect to have for this art form.</p>
-    </div>
-  </div>
+    const observer = new IntersectionObserver((entries, obs) => {
+      let delay = 0;
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('revealed');
+          }, delay);
+          delay += 150;
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-  <div class="section-block wrap">
-    <h2>Performance</h2>
-    <p class="about-body" style="max-width:66ch; color:var(--ink-soft);">I perform at community events, private functions, and showcases, blending Bollywood's narrative energy with the technical control of belly dance. Available for bookings — get in touch for availability and rates.</p>
-  </div>
-
-  <div class="section-block wrap">
-    <h2>Teaching</h2>
-    <p class="about-body" style="max-width:66ch; color:var(--ink-soft); margin-bottom:24px;">I teach both styles to students at every level, from complete beginners to those preparing for performance. Classes focus on technique, musicality, and — just as important — the confidence to actually enjoy moving.</p>
-    <div class="help-grid">
-      <div class="help-item">
-        <h4>Beginner Bollywood</h4>
-        <p>Foundational steps, expression, and choreography for total beginners.</p>
-      </div>
-      <div class="help-item">
-        <h4>Belly dance technique</h4>
-        <p>Isolations, posture, and the technical vocabulary of the form.</p>
-      </div>
-      <div class="help-item">
-        <h4>Choreography workshops</h4>
-        <p>Group sessions building a full routine from scratch.</p>
-      </div>
-      <div class="help-item">
-        <h4>Private sessions</h4>
-        <p>One-on-one coaching for performance prep or personal growth.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-block wrap">
-    <h2>Gallery</h2>
-    <div class="gallery-grid">
-      <div class="g"></div><div class="g"></div><div class="g"></div><div class="g"></div>
-      <div class="g"></div><div class="g"></div><div class="g"></div><div class="g"></div>
-    </div>
-  </div>
-
-  <div class="section-block wrap">
-    <h2>Videos</h2>
-    <div class="video-grid">
-      <div class="video-card">Performance reel<br>— coming soon</div>
-      <div class="video-card">Teaching highlights<br>— coming soon</div>
-      <div class="video-card">Behind the choreography<br>— coming soon</div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ ANATHINKS ============ -->
-<section id="anathinks">
-  <div class="page-head wrap">
-    <p class="eyebrow">AnaThinks</p>
-    <h1>Thoughts on self-love, healing &amp; the rest of it</h1>
-    <p class="dek">A running notebook on psychology, relationships, personal growth, and the small observations that add up to a life.</p>
-  </div>
-
-  <div class="section-block wrap">
-    <div class="blog-grid">
-      <div class="blog-card">
-        <p class="tag">Self-love</p>
-        <h3>The difference between self-love and self-indulgence</h3>
-        <p>One asks "what do I actually need," the other asks "what will make this feeling go away." They look similar from the outside. They are not the same thing.</p>
-        <p class="read">Read the piece</p>
-      </div>
-      <div class="blog-card">
-        <p class="tag">Relationships</p>
-        <h3>Why we repeat the relationship we swore we'd never repeat</h3>
-        <p>Patterns aren't punishments. They're just unfinished business, showing up in a new outfit until we finally look at it directly.</p>
-        <p class="read">Read the piece</p>
-      </div>
-      <div class="blog-card">
-        <p class="tag">Healing</p>
-        <h3>Healing isn't linear, but it does have a direction</h3>
-        <p>You will have worse days after good ones. That doesn't mean you're back at the start — it means healing was never a straight line to begin with.</p>
-        <p class="read">Read the piece</p>
-      </div>
-      <div class="blog-card">
-        <p class="tag">Psychology</p>
-        <h3>The stories we tell about who we are — and who wrote them</h3>
-        <p>Most of the beliefs you hold about yourself were written by someone else, at a time when you had no way of arguing back.</p>
-        <p class="read">Read the piece</p>
-      </div>
-      <div class="blog-card">
-        <p class="tag">Personal growth</p>
-        <h3>On doing the hard thing before you feel ready</h3>
-        <p>Readiness is a feeling, not a prerequisite. Most of what I'm proud of, I did while still scared.</p>
-        <p class="read">Read the piece</p>
-      </div>
-      <div class="blog-card">
-        <p class="tag">Life lessons</p>
-        <h3>What architecture taught me about rebuilding a life</h3>
-        <p>You don't tear down the whole system to fix one broken part. You isolate it, understand it, and replace it carefully — the same is true of a life.</p>
-        <p class="read">Read the piece</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CONTACT ============ -->
-<section id="contact">
-  <div class="page-head wrap">
-    <p class="eyebrow">Contact</p>
-    <h1>Let's start a conversation</h1>
-    <p class="dek">Whether you're hiring, seeking coaching, curious about the book, or interested in a dance class or performance — reach out.</p>
-  </div>
-
-  <div class="contact-grid wrap">
-    <form onsubmit="event.preventDefault(); alert('Thank you — this form is a placeholder and not yet connected to an inbox.');">
-      <div class="field">
-        <label for="cName">Name</label>
-        <input id="cName" type="text" required>
-      </div>
-      <div class="field">
-        <label for="cEmail">Email</label>
-        <input id="cEmail" type="email" required>
-      </div>
-      <div class="field">
-        <label for="cReason">What are you reaching out about?</label>
-        <select id="cReason">
-          <option>Technology / hiring</option>
-          <option>Life coaching / counselling</option>
-          <option>The book</option>
-          <option>Dance classes or performance</option>
-          <option>Something else</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="cMsg">Message</label>
-        <textarea id="cMsg" rows="5" required></textarea>
-      </div>
-      <button type="submit" class="btn solid">Send message</button>
-    </form>
-    <div class="contact-info">
-      <h3>Other ways to reach me</h3>
-      <div class="line"><b>Email</b> — hello@anaghasonde.com</div>
-      <div class="line"><b>LinkedIn</b> — for technology &amp; hiring conversations</div>
-      <div class="line"><b>Instagram</b> — for dance &amp; AnaThinks</div>
-      <div class="line"><b>Book a session</b> — for coaching &amp; counselling enquiries</div>
-    </div>
-  </div>
-</section>
-
-</main>
-
-<footer>
-  <div class="wrap">
-    <p>© 2026 Anagha Sonde. All rights reserved.</p>
-    <div class="fnav">
-      <a href="#about">About</a>
-      <a href="#book">Book</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </div>
-</footer>
-
-<script>
-  const sections = document.querySelectorAll('main > section[id]');
-  const navLinks = document.querySelectorAll('nav.primary a');
-  const menuBtn = document.getElementById('menuBtn');
-  const primaryNav = document.getElementById('primaryNav');
-
-  function showPage(id){
-    sections.forEach(s => {
-      if(s.id === id){
-        s.classList.add('active');
-        s.classList.remove('page-enter');
-        void s.offsetWidth;
-        s.classList.add('page-enter');
-      } else {
-        s.classList.remove('active');
-      }
+    document.querySelectorAll('.pathway').forEach(el => {
+      el.classList.add('reveal-ready');
+      observer.observe(el);
     });
-    navLinks.forEach(a => a.classList.toggle('active', a.dataset.page === id));
-    window.scrollTo({top:0, behavior:'instant' in window ? 'instant' : 'auto'});
-    primaryNav.classList.remove('open');
-  }
 
-  function routeFromHash(){
-    const id = (location.hash || '#home').replace('#','');
-    const valid = ['home','about','technology','coaching','book','dance','anathinks','contact'];
-    showPage(valid.includes(id) ? id : 'home');
-  }
-
-  const observer = new IntersectionObserver((entries, obs) => {
-    let delay = 0;
-    entries.forEach(entry => {
-      if(entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('revealed');
-        }, delay);
-        delay += 150;
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-  document.querySelectorAll('.pathway').forEach(el => {
-    el.classList.add('reveal-ready');
-    observer.observe(el);
-  });
-
-  window.addEventListener('hashchange', routeFromHash);
-  menuBtn.addEventListener('click', () => primaryNav.classList.toggle('open'));
-  routeFromHash();
-</script>
+    window.addEventListener('hashchange', routeFromHash);
+    menuBtn.addEventListener('click', () => primaryNav.classList.toggle('open'));
+    routeFromHash();
+  </script>
 
 </body>
+
 </html>
